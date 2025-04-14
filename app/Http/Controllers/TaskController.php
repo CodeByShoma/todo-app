@@ -22,7 +22,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.create');
     }
 
     /**
@@ -30,7 +30,21 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // バリデーション
+        $request->validate([
+            'title' => 'required',
+            'description' => 'nullable',
+            'due_date' => ['nullable','date'],
+        ]);
+
+        // 新規登録
+        Task::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'due_date' => $request->due_date,
+        ]);
+
+        return redirect()->route('tasks.index');
     }
 
     /**

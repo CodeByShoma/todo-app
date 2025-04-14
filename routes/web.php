@@ -25,7 +25,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //タスク一覧表示のルート
-Route::get('/', [TaskController::class, 'index'])->middleware('auth');
+Route::get('/', [TaskController::class, 'index'])->middleware('auth')->name('tasks.index');
+
+//新規登録のルート
+Route::get('/tasks/create', [TaskController::class, 'create'])->middleware('auth')->name('tasks.create');
+
+//登録処理のルート
+Route::post('/tasks/store', [TaskController::class, 'store'])->middleware('auth')->name('tasks.store');
 
 
 
