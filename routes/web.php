@@ -33,6 +33,8 @@ Route::get('/tasks/create', [TaskController::class, 'create'])->middleware('auth
 //登録処理のルート
 Route::post('/tasks/store', [TaskController::class, 'store'])->middleware('auth')->name('tasks.store');
 
+//詳細画面のルート
+Route::get('/tasks/{id}', [TaskController::class, 'show'])->middleware('auth')->name('tasks.show');
 
 
 Route::middleware('auth')->group(function () {

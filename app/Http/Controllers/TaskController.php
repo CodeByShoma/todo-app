@@ -52,7 +52,10 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // 指定されたIDのタスクを取得（なければ404）
+        $task = Task::findOrFail($id);
+
+        return view('tasks.show', compact('task'));
     }
 
     /**
