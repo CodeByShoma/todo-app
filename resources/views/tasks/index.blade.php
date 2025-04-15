@@ -31,7 +31,7 @@
                                     <tbody>
                                         @foreach ($tasks as $task)
                                             <tr>
-                                                <td class="px-4 py-3"><a class="text-blue-500 hover:text-blue-800" href="{{ route('tasks.show', $task -> id) }}">{{ $task->title }}</a></td>
+                                                <td class="px-4 py-3"><a class="text-blue-500 hover:text-blue-800" href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a></td>
                                                 <td class="px-4 py-3">{{ \Carbon\Carbon::parse($task->due_date)->format('Y-m-d') }}</td>
 
                                                 <td class="px-4 py-3">
@@ -39,7 +39,11 @@
                                                 </td>
 
                                                 <td class="px-4 py-3">
-                                                    <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">削除</button>
+                                                    <form method="post" action="{{ route('tasks.destroy', ['id' => $task->id]) }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">削除</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -37,6 +37,9 @@ Route::post('/tasks/store', [TaskController::class, 'store'])->middleware('auth'
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->middleware('auth')->name('tasks.show');
 
 
+//削除処理のルート
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->middleware('auth')->name('tasks.destroy');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

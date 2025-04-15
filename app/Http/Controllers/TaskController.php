@@ -12,7 +12,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::select('id', 'title', 'due_date')->get();
+        $tasks = Task::select('id','title', 'due_date')->get();
 
         return view('tasks/index', compact('tasks'));
     }
@@ -79,6 +79,11 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // 指定されたIDのタスクを取得（なければ404）
+        $task = Task::findOrFail($id);
+
+        $task -> delete();
+
+        return redirect()->route('tasks.index');
     }
 }
