@@ -63,7 +63,8 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        return view('tasks.edit', compact('task'));
     }
 
     /**
@@ -71,7 +72,22 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // バリデーション
+        $request->validate([
+            'title' => 'required',
+            'description' => 'nullable',
+            'due_date' => ['nullable','date'],
+        ]);
+
+        // 更新処理
+        $task = Task::findOrFail($id);
+        $task->update([
+            'title' => $request -> title,
+            'description' => $request -> description,
+            'due_date' => $request -> due_date,
+        ]);
+
+        return redirect()->route('tasks.index');
     }
 
     /**

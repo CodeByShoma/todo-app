@@ -41,7 +41,7 @@
                                                 <td class="px-4 py-3">{{ \Carbon\Carbon::parse($task->updated_at)->format('Y-m-d') }}</td>
 
                                                 <td class="px-4 py-3">
-                                                    <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
+                                                    <button onclick="location.href='{{ route('tasks.edit', $task->id) }}'" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
                                                 </td>
 
                                                 <td class="px-4 py-3">
