@@ -33,6 +33,9 @@ Route::get('/tasks/create', [TaskController::class, 'create'])->middleware('auth
 //登録処理のルート
 Route::post('/tasks/store', [TaskController::class, 'store'])->middleware('auth')->name('tasks.store');
 
+//完了タスク一覧画面のルート
+Route::get('/tasks/completed', [TaskController::class, 'completed'])->middleware('auth')->name('tasks.completed');
+
 //詳細画面のルート
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->middleware('auth')->name('tasks.show');
 
@@ -44,6 +47,12 @@ Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->middleware('aut
 
 //更新処理のルート
 Route::put('/tasks/{id}', [TaskController::class, 'update'])->middleware('auth')->name('tasks.update');
+
+//完了処理のルート
+Route::patch('/tasks/{id}/complete', [TaskController::class, 'complete'])->middleware('auth')->name('tasks.complete');
+
+//完了タスク一覧画面のルート
+Route::get('/tasks/completed', [TaskController::class, 'completed'])->middleware('auth')->name('tasks.completed');
 
 
 Route::middleware('auth')->group(function () {

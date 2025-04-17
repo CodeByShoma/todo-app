@@ -28,7 +28,6 @@
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">更新日</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
-                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                                         </tr>
                                     </thead>
 
@@ -40,11 +39,18 @@
                                                 <td class="px-4 py-3">{{ \Carbon\Carbon::parse($task->created_at)->format('Y-m-d') }}</td>
                                                 <td class="px-4 py-3">{{ \Carbon\Carbon::parse($task->updated_at)->format('Y-m-d') }}</td>
 
-                                                <td class="px-4 py-3">
-                                                    <button onclick="location.href='{{ route('tasks.edit', $task->id) }}'" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
-                                                </td>
+                                                <td class="px-4 py-3 flex justify-end space-x-5">
+                                                    {{-- 完了ボタン --}}
+                                                    <form method="post" action="{{ route('tasks.complete', ['id' => $task->id]) }}">
+                                                        @csrf
+                                                        @method('patch')
+                                                        <button type="submit" class="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">完了</button>
+                                                    </form>
 
-                                                <td class="px-4 py-3">
+                                                    {{-- 編集ボタン --}}
+                                                    <button onclick="location.href='{{ route('tasks.edit', $task->id) }}'" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
+
+                                                    {{-- 削除ボタン --}}
                                                     <form method="post" action="{{ route('tasks.destroy', ['id' => $task->id]) }}">
                                                         @csrf
                                                         @method('delete')

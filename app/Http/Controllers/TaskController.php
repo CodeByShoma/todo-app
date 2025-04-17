@@ -12,9 +12,12 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::select('id','title', 'due_date')->get();
+        // $tasks = Task::select('id','title', 'due_date')->get();
 
-        return view('tasks/index', compact('tasks'));
+        //タスクが未完了のタスクのみ取得
+        $tasks = Task::where('is_done', false)->get();
+
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -102,4 +105,24 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index');
     }
+
+    public function complete(string $id)
+    {
+        // 指定されたIDのタスクを取得（なければ404）
+        $task = Task::findOrFail($id);
+        $task -> is_done = true;
+        $task -> save();
+
+        return redirect()->route('tasks.index');
+    }
+
+    public function completed()
+    {
+        //完了のタスクのみ取得
+        $tasks = Task::where('is_done', true)->get();
+
+        return view('tasks.completed', compact('tasks'));
+    }
+
+
 }

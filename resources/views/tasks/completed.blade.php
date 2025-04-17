@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            タスク一覧画面
+            完了タスク一覧画面
         </h2>
     </x-slot>
 
@@ -21,7 +21,7 @@
 
                                     {{-- 完了タスク一覧 --}}
                                     <div class="mb-5 flex justify-end">
-                                        <button onclick="location.href='{{ route('tasks.completed') }}'" class=" text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">完了タスク一覧</button>
+                                        <button onclick="location.href='{{ route('tasks.index') }}'" class=" text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">タスク一覧</button>
                                     </div>
                                 </div>
 
@@ -46,18 +46,17 @@
                                                     <form method="post" action="{{ route('tasks.complete', ['id' => $task->id]) }}">
                                                         @csrf
                                                         @method('patch')
-                                                        <button type="submit" class=" text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">完了</button>
+                                                        <button type="submit" class="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">完了</button>
                                                     </form>
 
                                                     {{-- 編集ボタン --}}
-                                                    <button onclick="location.href='{{ route('tasks.edit', $task->id) }}'" class=" text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
-
+                                                    <button onclick="location.href='{{ route('tasks.edit', $task->id) }}'" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
 
                                                     {{-- 削除ボタン --}}
                                                     <form method="post" action="{{ route('tasks.destroy', ['id' => $task->id]) }}">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class=" text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">削除</button>
+                                                        <button type="submit" class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">削除</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -78,4 +77,5 @@
         </div>
     </div>
 </x-app-layout>
+
 
